@@ -25,6 +25,54 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContent.innerHTML = content;
         setupEventListeners(section);
         loadArticleList(section);
+
+        // Initialiser TinyMCE après le chargement du contenu
+        initTinyMCE();
+    }
+
+      // Fonction pour initialiser TinyMCE
+    function initTinyMCE() {
+        // Détruire les instances existantes
+        if (tinymce.editors.length > 0) {
+            tinymce.remove();
+        }
+
+        tinymce.init({
+            selector: '.wysiwyg-editor',
+            height: 400,
+            menubar: true,
+            plugins: [
+                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                'insertdatetime', 'media', 'table', 'help', 'wordcount'
+            ],
+            toolbar: 'undo redo | blocks | ' +
+                'bold italic forecolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | image media | help',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+            images_upload_handler: function (blobInfo, success, failure) {
+                // Upload d'image directement dans l'éditeur
+                const formData = new FormData();
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
+                
+                // Vous devrez créer cette route sur votre backend
+                fetch('https://infobtpbackend.vercel.app/uploadEditorImage', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    success(data.location); // URL de l'image uploadée
+                })
+                .catch(error => {
+                    failure('Erreur lors de l\'upload de l\'image');
+                });
+            },
+            automatic_uploads: true,
+            file_picker_types: 'image',
+            language: 'fr_FR'
+        });
     }
 
     function setupEventListeners(section) {
@@ -97,11 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } else {
             switch (section) {
-                case 'Publi-reportage':
-                    url = `${baseUrl}/publicreportage`;
+                case 'Architecture':
+                    url = `${baseUrl}/architecture`;
                     break;
-                case 'Economie':
-                    url = `${baseUrl}/economie`;
+                case 'Marche-Industrie':
+                    url = `${baseUrl}/marcheindustrie`;
                     break;
                 case 'Interviews':
                     url = `${baseUrl}/interviews`;
@@ -109,18 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'Video-Journalistiques':
                     url = `${baseUrl}/videosjournalistiques`;
                     break;
-                case 'Enquetes-Exclusives':
-                    url = `${baseUrl}/enquetesExclusives`;
+                case 'Travaux-publics':
+                    url = `${baseUrl}/travauxpublics`;
                     break;
-                case 'Institutions':
-                    url = `${baseUrl}/institutions`;
+                case 'Foncier':
+                    url = `${baseUrl}/foncier`;
                     break;
                 
-                case 'Opinion':
-                    url = `${baseUrl}/opinions`;
+                case 'Energies-Mines':
+                    url = `${baseUrl}/energiesmines`;
                     break;
-                case 'Faits-divers':
-                    url = `${baseUrl}/divers`;
+                case 'Produits-Materiaux':
+                    url = `${baseUrl}/produitsmateriaux`;
                     break;
                 default:
                     console.error('Section non reconnue');
@@ -192,11 +240,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const query = form.querySelector('input[name="search"]').value;
         console.log(`Recherche dans la section ${section} pour: ${query}`);
         switch (section) {
-            case 'Publi-reportage':
-                url = `${baseUrl}/publicreportage/search`;
+            case 'Architecture':
+                url = `${baseUrl}/architecture/search`;
                 break;
-            case 'Economie':
-                url = `${baseUrl}/economie/search`;
+            case 'Marche-Industrie':
+                url = `${baseUrl}/marcheindustrie/search`;
                 break;
             case 'Interviews':
                 url = `${baseUrl}/interviews/search`;
@@ -204,20 +252,20 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'Video-Journalistiques':
                 url = `${baseUrl}/videosjournalistiques/search`;
                 break;
-            case 'Enquetes-Exclusives':
-                url = `${baseUrl}/enquetesExclusives/search`;
+            case 'Travaux-publics':
+                url = `${baseUrl}/travauxpublics/search`;
                 break;
-            case 'Institutions':
-                url = `${baseUrl}/institutions/search`;
+            case 'Foncier':
+                url = `${baseUrl}/foncier/search`;
                 break;
             case 'Sondages':
                 url = `${baseUrl}/sondages/search`;
                 break;
-            case 'Opinion':
-                url = `${baseUrl}/opinions/search`;
+            case 'Energies-Mines':
+                url = `${baseUrl}/energiesmines/search`;
                 break;
-            case 'Faits-divers':
-                url = `${baseUrl}/divers/search`;
+            case 'Produits-Materiaux':
+                url = `${baseUrl}/produitsmateriaux/search`;
                 break;
             default:
                 console.error('Section non reconnue');
@@ -341,11 +389,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
             console.log(`Suppression de l'article ${id} dans la section ${section}`);
             switch (section) {
-                case 'Publi-reportage':
-                    url = `${baseUrl}/publicreportage/${id}`;
+                case 'Architecture':
+                    url = `${baseUrl}/architecture/${id}`;
                     break;
-                case 'Economie':
-                    url = `${baseUrl}/economie/${id}`;
+                case 'Marche-Industrie':
+                    url = `${baseUrl}/marcheindustrie/${id}`;
                     break;
                 case 'Interviews':
                     url = `${baseUrl}/interviews/${id}`;
@@ -353,20 +401,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'Video-Journalistiques':
                     url = `${baseUrl}/videosjournalistiques/${id}`;
                     break;
-                case 'Enquetes-Exclusives':
-                    url = `${baseUrl}/enquetesExclusives/${id}`;
+                case 'Travaux-publics':
+                    url = `${baseUrl}/travauxpublics/${id}`;
                     break;
-                case 'Institutions':
-                    url = `${baseUrl}/institutions/${id}`;
+                case 'Foncier':
+                    url = `${baseUrl}/foncier/${id}`;
                     break;
                 case 'Sondages':
                         url = `${baseUrl}/sondages/${id}`;
                         break;
-                case 'Opinion':
-                    url = `${baseUrl}/opinions/${id}`;
+                case 'Energies-Mines':
+                    url = `${baseUrl}/energiesmines/${id}`;
                     break;
-                case 'Faits-divers':
-                    url = `${baseUrl}/divers/${id}`;
+                case 'Produits-Materiaux':
+                    url = `${baseUrl}/produitsmateriaux/${id}`;
                     break;
                 default:
                     console.error('Section non reconnue');
@@ -411,11 +459,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleEdit(section, id) {
         let url = '';
         switch (section) {
-            case 'Publi-reportage':
-                url = `${baseUrl}/publicreportage/${id}`;
+            case 'Architecture':
+                url = `${baseUrl}/architecture/${id}`;
                 break;
-            case 'Economie':
-                url = `${baseUrl}/economie/${id}`;
+            case 'Marche-Industrie':
+                url = `${baseUrl}/marcheindustrie/${id}`;
                 break;
             case 'Interviews':
                 url = `${baseUrl}/interviews/${id}`;
@@ -423,20 +471,20 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'Video-Journalistiques':
                 url = `${baseUrl}/videosjournalistiques/${id}`;
                 break;
-            case 'Enquetes-Exclusives':
-                url = `${baseUrl}/enquetesExclusives/${id}`;
+            case 'Travaux-publics':
+                url = `${baseUrl}/travauxpublics/${id}`;
                 break;
-            case 'Institutions':
-                url = `${baseUrl}/institutions/${id}`;
-                break;
-            case 'Opinion':
-                url = `${baseUrl}/opinions/${id}`;
-                break;
-            case 'Faits-divers':
-                url = `${baseUrl}/divers/${id}`;
+            case 'Foncier':
+                url = `${baseUrl}/foncier/${id}`;
                 break;
             case 'Sondages':
                 url = `${baseUrl}/sondages/${id}`;
+                break;
+            case 'Energies-Mines':
+                url = `${baseUrl}/energiesmines/${id}`;
+                break;
+            case 'Produits-Materiaux':
+                url = `${baseUrl}/produitsmateriaux/${id}`;
                 break;
             default:
                 console.error('Section non reconnue');
@@ -529,19 +577,19 @@ document.addEventListener('DOMContentLoaded', () => {
                             <input type="text" name="grandTitre" id="grandTitre-${article._id}" value="${article.titres.grandTitre}" required>
                             
                             <label for="contenuGrandTitre-${article._id}">Contenu du grand titre :</label>
-                            <textarea name="contenuGrandTitre" id="contenuGrandTitre-${article._id}" required>${article.titres.contenuGrandTitre}</textarea>
+                            <textarea name="contenuGrandTitre" class="wysiwyg-editor" id="contenuGrandTitre-${article._id}" required>${article.titres.contenuGrandTitre}</textarea>
                             
                             <label for="sousTitre1-${article._id}">Sous Titre 1 :</label>
                             <input type="text" name="sousTitre1" id="sousTitre1-${article._id}" value="${article.titres.sousTitres[0].sousTitre}" required>
                             
                             <label for="contenuSousTitre1-${article._id}">Contenu du sous titre 1 :</label>
-                            <textarea name="contenuSousTitre1" id="contenuSousTitre1-${article._id}" required>${article.titres.sousTitres[0].contenuSousTitre}</textarea>
+                            <textarea name="contenuSousTitre1" class="wysiwyg-editor" id="contenuSousTitre1-${article._id}" required>${article.titres.sousTitres[0].contenuSousTitre}</textarea>
                             
                             <label for="sousTitre2-${article._id}">Sous Titre 2 :</label>
                             <input type="text" name="sousTitre2" id="sousTitre2-${article._id}" value="${article.titres.sousTitres[1].sousTitre}" required>
                             
                             <label for="contenuSousTitre2-${article._id}">Contenu du sous titre 2 :</label>
-                            <textarea name="contenuSousTitre2" id="contenuSousTitre2-${article._id}" required>${article.titres.sousTitres[1].contenuSousTitre}</textarea>
+                            <textarea name="contenuSousTitre2" class="wysiwyg-editor" id="contenuSousTitre2-${article._id}" required>${article.titres.sousTitres[1].contenuSousTitre}</textarea>
                             
                             <label for="auteur-${article._id}">Auteur:</label>
                             <input type="text" name="auteur" id="auteur-${article._id}" value="${article.auteur}" required>
@@ -568,11 +616,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 }
                 
-    
+                // Réinitialiser TinyMCE après chargement du formulaire d'édition
+                initTinyMCE();
+                
                 const editForm = document.getElementById(`edit-form-${article._id}`);
                 console.log(article._id)
                 editForm.addEventListener('submit', (e) => {
                     e.preventDefault();
+
+                    // Synchroniser TinyMCE avant soumission
+                    tinymce.triggerSave();
+
                     const formData = new FormData(editForm);
                     console.log(url)
                     fetch(url, {
@@ -684,6 +738,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
     
     // function addSubscriberDetailListeners() {
     //     document.querySelectorAll('#subscribers-list .view-detail').forEach(button => {
@@ -803,18 +858,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 <label for="grandTitre">Le Grand Titre :</label>
                 <input type="text" name="grandTitre" placeholder="Grand Titre" required>
                 <label for="contenuGrandTitre">Contenu du grand titre :</label>
-                <textarea name="contenuGrandTitre" placeholder="Contenu du Grand titre" required></textarea>
+                <textarea name="contenuGrandTitre" class="wysiwyg-editor" placeholder="Contenu du Grand titre" required></textarea>
                 <label for="image">Télécharger l'image principale :</label>
                 <input type="file" id="image" name="imageGrandTitre" accept="image/*" required>
                 <label for="sousTitre1">Sous Titre 1 :</label>
                 <input type="text" name="sousTitre1" placeholder="Sous Titre 1" required>
                 <label for="contenuSousTitre1">Contenu du sous titre 1 :</label>
-                <textarea name="contenuSousTitre1" placeholder="Contenu du sous titre 1" required></textarea>
+                <textarea name="contenuSousTitre1" class="wysiwyg-editor" placeholder="Contenu du sous titre 1" required></textarea>
                 
                 <label for="sousTitre2">Sous Titre 2 :</label>
                 <input type="text" name="sousTitre2" placeholder="Sous Titre 2" required>
                 <label for="sousTitre2">Contenu du sous titre 2 :</label>
-                <textarea name="contenuSousTitre2" placeholder="Contenu du sous titre 2" required></textarea>
+                <textarea name="contenuSousTitre2" class="wysiwyg-editor" placeholder="Contenu du sous titre 2" required></textarea>
                
                 <label for="externalLink">Ajouté un lien externe :</label>
                 <input type="text" name="externalLink" placeholder="www.http://exemple.com" required>
@@ -962,5 +1017,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
     }
 
-    loadSection('Publi-reportage');
+    // loadSection('Publi-reportage');
+    loadSection('Architecture');
 });
