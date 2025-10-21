@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
-    let baseUrl =  'https://infobtpbackend.vercel.app' ; //http://localhost:5500' //'    // 
+    let baseUrl =  'https://infobtp-website-indol.vercel.app/' ; //http://localhost:5500' //'    // 
     let url = '';
     function handleAddSubmit(section, form) {
         const formData = new FormData(form);
