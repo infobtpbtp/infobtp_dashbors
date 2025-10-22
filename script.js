@@ -24,30 +24,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = getSectionContent(section);
         mainContent.innerHTML = content;
         // Initialiser TinyMCE sur les textarea injectés dynamiquement
-        if (window.tinymce) {
-            initTinyMCE();
-        }
+        // if (window.tinymce) {
+        //     initTinyMCE();
+        // }
         setupEventListeners(section);
         loadArticleList(section);
     }
 
     // Initialise TinyMCE pour tous les textarea présents dans le DOM
-    function initTinyMCE() {
-        // Détruire les instances existantes pour éviter duplication
-        if (window.tinymce) {
-            window.tinymce.remove();
-        }
+    // function initTinyMCE() {
+    //     // Détruire les instances existantes pour éviter duplication
+    //     if (window.tinymce) {
+    //         window.tinymce.remove();
+    //     }
 
-        tinymce.init({
-            selector: 'textarea',
-            menubar: false,
-            plugins: ['link', 'lists', 'image', 'code', 'paste', 'autoresize'],
-            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | link | code',
-            height: 300,
-            branding: false,
-            paste_as_text: true
-        });
-    }
+    //     tinymce.init({
+    //         selector: 'textarea',
+    //         menubar: false,
+    //         plugins: ['link', 'lists', 'image', 'code', 'paste', 'autoresize'],
+    //         toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | link | code',
+    //         height: 300,
+    //         branding: false,
+    //         paste_as_text: true
+    //     });
+    // }
 
     function setupEventListeners(section) {
         const addForm = document.querySelector(`#${section}-add-form`);
@@ -91,9 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let url = '';
     function handleAddSubmit(section, form) {
         // Si TinyMCE est utilisé, forcer la synchronisation du contenu vers les textarea
-        if (window.tinymce) {
-            tinymce.triggerSave();
-        }
+        // if (window.tinymce) {
+        //     tinymce.triggerSave();
+        // }
         const formData = new FormData(form);
         
         if (section === 'Sondages') {
@@ -206,9 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleEditSubmit(section, form) {
-        if (window.tinymce) {
-            tinymce.triggerSave();
-        }
+        // if (window.tinymce) {
+        //     tinymce.triggerSave();
+        // }
         const formData = new FormData(form);
         console.log(`Modification d'un article dans la section ${section}`);
         form.reset();
