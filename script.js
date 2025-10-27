@@ -586,6 +586,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             <label for="newImage-${article._id}">Changer l'image :</label>
                             <input type="file" id="newImage-${article._id}" name="imageGrandTitre" accept="image/*">
                             
+                            <label for="imageSecondaire1-${article._id}">Image secondaire 1 actuelle:</label>
+                            <img src="${article.imageSecondaire1}" alt="Image actuelle" style="max-width: 200px;">
+                            <label for="newImageSecondaire1-${article._id}">Changer l'image :</label>
+                            <input type="file" id="newImageSecondaire1-${article._id}" name="imageSecondaire1" accept="image/*">
+                            
+                            <label for="imageSecondaire2-${article._id}">Image secondaire 2 actuelle:</label>
+                            <img src="${article.imageSecondaire2}" alt="Image actuelle" style="max-width: 200px;">
+                            <label for="newImageSecondaire2-${article._id}">Changer l'image :</label>
+                            <input type="file" id="newImageSecondaire2-${article._id}" name="imageSecondaire2" accept="image/*">
+                            
                             ${section === 'BTP Video' || section === 'Video Journalistiques' ? 
                                 `<label for="videoUrl-${article._id}">URL de la vidéo :</label>
                                 <input type="url" name="videoUrl" id="videoUrl-${article._id}" value="${article.videoUrl}" required>` 
@@ -835,15 +845,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 <textarea name="contenuGrandTitre" placeholder="Contenu du Grand titre" required></textarea>
                 <label for="image">Télécharger l'image principale :</label>
                 <input type="file" id="image" name="imageGrandTitre" accept="image/*" required>
+                
                 <label for="sousTitre1">Sous Titre 1 :</label>
                 <input type="text" name="sousTitre1" placeholder="Sous Titre 1" required>
                 <label for="contenuSousTitre1">Contenu du sous titre 1 :</label>
-                <textarea name="contenuSousTitre1" placeholder="Contenu du sous titre 1" required></textarea>
+                <textarea name="contenuSousTitre1"  placeholder="Contenu du sous titre 1"></textarea>
+                <label for="imageSecondaire1">Image du sous titre 1 (optionnelle) :</label>
+                <input type="file" id="imageSecondaire1" name="imageSecondaire1" accept="image/*">
                 
                 <label for="sousTitre2">Sous Titre 2 :</label>
                 <input type="text" name="sousTitre2" placeholder="Sous Titre 2" required>
                 <label for="sousTitre2">Contenu du sous titre 2 :</label>
-                <textarea name="contenuSousTitre2" placeholder="Contenu du sous titre 2" required></textarea>
+                <textarea name="contenuSousTitre2" placeholder="Contenu du sous titre 2" ></textarea>
+                <label for="imageSecondaire2">Image du sous titre 2 (optionnelle) :</label>
+                <input type="file" id="imageSecondaire2" name="imageSecondaire2" accept="image/*">
                
                 <label for="externalLink">Ajouté un lien externe :</label>
                 <input type="text" name="externalLink" placeholder="www.http://exemple.com" required>
