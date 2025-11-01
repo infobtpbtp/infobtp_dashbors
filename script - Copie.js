@@ -24,30 +24,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = getSectionContent(section);
         mainContent.innerHTML = content;
         // Initialiser TinyMCE sur les textarea injectés dynamiquement
-        // if (window.tinymce) {
-        //     initTinyMCE();
-        // }
+        if (window.tinymce) {
+            initTinyMCE();
+        }
         setupEventListeners(section);
         loadArticleList(section);
     }
 
     // Initialise TinyMCE pour tous les textarea présents dans le DOM
-    // function initTinyMCE() {
-    //     // Détruire les instances existantes pour éviter duplication
-    //     if (window.tinymce) {
-    //         window.tinymce.remove();
-    //     }
+    function initTinyMCE() {
+        // Détruire les instances existantes pour éviter duplication
+        if (window.tinymce) {
+            window.tinymce.remove();
+        }
 
-    //     tinymce.init({
-    //         selector: 'textarea',
-    //         menubar: false,
-    //         plugins: ['link', 'lists', 'image', 'code', 'paste', 'autoresize'],
-    //         toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | link | code',
-    //         height: 300,
-    //         branding: false,
-    //         paste_as_text: true
-    //     });
-    // }
+        tinymce.init({
+            selector: '.tinymce',
+            menubar: false,
+            plugins: ['link', 'lists', 'image', 'code', 'paste', 'autoresize'],
+            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | link | code',
+            height: 300,
+            branding: false,
+            paste_as_text: true
+        });
+    }
 
     function setupEventListeners(section) {
         const addForm = document.querySelector(`#${section}-add-form`);
@@ -94,6 +94,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // if (window.tinymce) {
         //     tinymce.triggerSave();
         // }
+
+        // Si TinyMCE est utilisé, forcer la synchronisation du contenu vers les textarea
+        if (window.tinymce) {
+            try {
+                tinymce.triggerSave();
+            } catch (e) {
+                console.warn('Erreur tinymce.triggerSave():', e);
+            }
+        }
         const formData = new FormData(form);
         
         if (section === 'Sondages') {
@@ -141,27 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'Institutions':
                     url = `${baseUrl}/institutions`;
                     break;
+                
                 case 'Opinion':
                     url = `${baseUrl}/opinions`;
-                    break;
-                case 'Architecture':
-                    url = `${baseUrl}/architecture`;
-                    break;
-                
-                case 'Marches-Industries':
-                    url = `${baseUrl}/marchesIndustries`;
-                    break;
-                case 'Energies-Mines':
-                    url = `${baseUrl}/energiesMines`;
-                    break;
-                case 'Produits-Materiaux':
-                    url = `${baseUrl}/produitsMateriaux`;
-                    break;
-                case 'Travaux-Publics':
-                    url = `${baseUrl}/travauxPublics`;
-                    break;
-                case 'Foncier':
-                    url = `${baseUrl}/foncier`;
                     break;
                 case 'Faits-divers':
                     url = `${baseUrl}/divers`;
@@ -224,9 +215,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleEditSubmit(section, form) {
-        // if (window.tinymce) {
-        //     tinymce.triggerSave();
-        // }
+        if (window.tinymce) {
+            tinymce.triggerSave();
+        }
         const formData = new FormData(form);
         console.log(`Modification d'un article dans la section ${section}`);
         form.reset();
@@ -262,24 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'Opinion':
                 url = `${baseUrl}/opinions/search`;
-                break;
-            case 'Architecture':
-                url = `${baseUrl}/architecture/search`;
-                break;
-            case 'Marches-Industries':
-                url = `${baseUrl}/marchesIndustries/search`;
-                break;
-            case 'Energies-Mines':
-                url = `${baseUrl}/energiesMines/search`;
-                break;
-            case 'Produits-Materiaux':
-                url = `${baseUrl}/produitsMateriaux/search`;
-                break;
-            case 'Travaux-Publics':
-                url = `${baseUrl}/travauxPublics/search`;
-                break;
-            case 'Foncier':
-                url = `${baseUrl}/foncier/search`;
                 break;
             case 'Faits-divers':
                 url = `${baseUrl}/divers/search`;
@@ -430,24 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'Opinion':
                     url = `${baseUrl}/opinions/${id}`;
                     break;
-                case 'Architecture':
-                    url = `${baseUrl}/architecture/${id}`;
-                    break;
-                case 'Marches-Industries':
-                    url = `${baseUrl}/marchesIndustries/${id}`;
-                    break;
-                case 'Energies-Mines':
-                    url = `${baseUrl}/energiesMines/${id}`;
-                    break;
-                case 'Produits-Materiaux':
-                    url = `${baseUrl}/produitsMateriaux/${id}`;
-                    break;
-                case 'Travaux-Publics':
-                    url = `${baseUrl}/travauxPublics/${id}`;
-                    break;
-                case 'Foncier':
-                    url = `${baseUrl}/foncier/${id}`;
-                    break;
                 case 'Faits-divers':
                     url = `${baseUrl}/divers/${id}`;
                     break;
@@ -514,24 +469,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'Opinion':
                 url = `${baseUrl}/opinions/${id}`;
-                break;
-            case 'Architecture':
-                url = `${baseUrl}/architecture/${id}`;
-                break;
-            case 'Marches-Industries':
-                url = `${baseUrl}/marchesIndustries/${id}`;
-                break;
-            case 'Energies-Mines':
-                url = `${baseUrl}/energiesMines/${id}`;
-                break;
-            case 'Produits-Materiaux':
-                url = `${baseUrl}/produitsMateriaux/${id}`;
-                break;
-            case 'Travaux-Publics':
-                url = `${baseUrl}/travauxPublics/${id}`;
-                break;
-            case 'Foncier':
-                url = `${baseUrl}/foncier/${id}`;
                 break;
             case 'Faits-divers':
                 url = `${baseUrl}/divers/${id}`;
@@ -630,19 +567,19 @@ document.addEventListener('DOMContentLoaded', () => {
                             <input type="text" name="grandTitre" id="grandTitre-${article._id}" value="${article.titres.grandTitre}" required>
                             
                             <label for="contenuGrandTitre-${article._id}">Contenu du grand titre :</label>
-                            <textarea name="contenuGrandTitre" id="contenuGrandTitre-${article._id}" required>${article.titres.contenuGrandTitre}</textarea>
+                            <textarea name="contenuGrandTitre" class="tinymce" id="contenuGrandTitre-${article._id}" required>${article.titres.contenuGrandTitre}</textarea>
                             
                             <label for="sousTitre1-${article._id}">Sous Titre 1 :</label>
-                            <input type="text" name="sousTitre1" id="sousTitre1-${article._id}" value="${article.titres.sousTitres[0].sousTitre}" >
+                            <input type="text" name="sousTitre1" id="sousTitre1-${article._id}" value="${article.titres.sousTitres[0].sousTitre}" required>
                             
                             <label for="contenuSousTitre1-${article._id}">Contenu du sous titre 1 :</label>
-                            <textarea name="contenuSousTitre1" id="contenuSousTitre1-${article._id}" >${article.titres.sousTitres[0].contenuSousTitre}</textarea>
+                            <textarea name="contenuSousTitre1" class="tinymce" id="contenuSousTitre1-${article._id}" required>${article.titres.sousTitres[0].contenuSousTitre}</textarea>
                             
                             <label for="sousTitre2-${article._id}">Sous Titre 2 :</label>
-                            <input type="text" name="sousTitre2" id="sousTitre2-${article._id}" value="${article.titres.sousTitres[1].sousTitre}" >
+                            <input type="text" name="sousTitre2" id="sousTitre2-${article._id}" value="${article.titres.sousTitres[1].sousTitre}" required>
                             
                             <label for="contenuSousTitre2-${article._id}">Contenu du sous titre 2 :</label>
-                            <textarea name="contenuSousTitre2" id="contenuSousTitre2-${article._id}" >${article.titres.sousTitres[1].contenuSousTitre}</textarea>
+                            <textarea name="contenuSousTitre2" class="tinymce" id="contenuSousTitre2-${article._id}" required>${article.titres.sousTitres[1].contenuSousTitre}</textarea>
                             
                             <label for="auteur-${article._id}">Auteur:</label>
                             <input type="text" name="auteur" id="auteur-${article._id}" value="${article.auteur}" required>
@@ -657,16 +594,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             <img src="${article.imageGrandTitre}" alt="Image actuelle" style="max-width: 200px;">
                             <label for="newImage-${article._id}">Changer l'image :</label>
                             <input type="file" id="newImage-${article._id}" name="imageGrandTitre" accept="image/*">
-                            
-                            <label for="imageSecondaire1-${article._id}">Image secondaire 1 actuelle:</label>
-                            <img src="${article.imageSecondaire1}" alt="Image actuelle" style="max-width: 200px;">
-                            <label for="newImageSecondaire1-${article._id}">Changer l'image :</label>
-                            <input type="file" id="newImageSecondaire1-${article._id}" name="imageSecondaire1" accept="image/*">
-                            
-                            <label for="imageSecondaire2-${article._id}">Image secondaire 2 actuelle:</label>
-                            <img src="${article.imageSecondaire2}" alt="Image actuelle" style="max-width: 200px;">
-                            <label for="newImageSecondaire2-${article._id}">Changer l'image :</label>
-                            <input type="file" id="newImageSecondaire2-${article._id}" name="imageSecondaire2" accept="image/*">
                             
                             ${section === 'BTP Video' || section === 'Video Journalistiques' ? 
                                 `<label for="videoUrl-${article._id}">URL de la vidéo :</label>
@@ -914,23 +841,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 <label for="grandTitre">Le Grand Titre :</label>
                 <input type="text" name="grandTitre" placeholder="Grand Titre" required>
                 <label for="contenuGrandTitre">Contenu du grand titre :</label>
-                <textarea name="contenuGrandTitre" placeholder="Contenu du Grand titre" required></textarea>
+                <textarea name="contenuGrandTitre" class="tinymce" placeholder="Contenu du Grand titre" required></textarea>
                 <label for="image">Télécharger l'image principale :</label>
                 <input type="file" id="image" name="imageGrandTitre" accept="image/*" required>
-                
                 <label for="sousTitre1">Sous Titre 1 :</label>
-                <input type="text" name="sousTitre1" placeholder="Sous Titre 1" >
+                <input type="text" name="sousTitre1" placeholder="Sous Titre 1" required>
                 <label for="contenuSousTitre1">Contenu du sous titre 1 :</label>
-                <textarea name="contenuSousTitre1"  placeholder="Contenu du sous titre 1"></textarea>
-                <label for="imageSecondaire1">Image du sous titre 1 (optionnelle) :</label>
-                <input type="file" id="imageSecondaire1" name="imageSecondaire1" accept="image/*">
+                <textarea name="contenuSousTitre1" class="tinymce" placeholder="Contenu du sous titre 1" required></textarea>
                 
                 <label for="sousTitre2">Sous Titre 2 :</label>
-                <input type="text" name="sousTitre2" placeholder="Sous Titre 2" >
+                <input type="text" name="sousTitre2" placeholder="Sous Titre 2" required>
                 <label for="sousTitre2">Contenu du sous titre 2 :</label>
-                <textarea name="contenuSousTitre2" placeholder="Contenu du sous titre 2" ></textarea>
-                <label for="imageSecondaire2">Image du sous titre 2 (optionnelle) :</label>
-                <input type="file" id="imageSecondaire2" name="imageSecondaire2" accept="image/*">
+                <textarea name="contenuSousTitre2" class="tinymce" placeholder="Contenu du sous titre 2" required></textarea>
                
                 <label for="externalLink">Ajouté un lien externe :</label>
                 <input type="text" name="externalLink" placeholder="www.http://exemple.com" required>
