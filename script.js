@@ -596,16 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <label for="newImageSousTitre2-${article._id}">Changer l'image sous-titre 2 :</label>
                             <input type="file" id="newImageSousTitre2-${article._id}" name="imageSousTitre2" accept="image/*">
 
-                            <label for="imageSecondaire1-${article._id}">Image secondaire 1 actuelle :</label>
-                            <img src="${article.titres.imageSecondaire1 || ''}" alt="Image secondaire 1" style="max-width: 200px;">
-                            <label for="newImageSecondaire1-${article._id}">Changer l'image secondaire 1 :</label>
-                            <input type="file" id="newImageSecondaire1-${article._id}" name="imageSecondaire1" accept="image/*">
-                            
-                            <label for="imageSecondaire2-${article._id}">Image secondaire 2 actuelle :</label>
-                            <img src="${article.titres.imageSecondaire2 || ''}" alt="Image secondaire 2" style="max-width: 200px;">
-                            <label for="newImageSecondaire2-${article._id}">Changer l'image secondaire 2 :</label>
-                            <input type="file" id="newImageSecondaire2-${article._id}" name="imageSecondaire2" accept="image/*">
-                            
+                           
                             ${section === 'BTP Video' || section === 'Video Journalistiques' ? 
                                 `<label for="videoUrl-${article._id}">URL de la vidéo :</label>
                                 <input type="url" name="videoUrl" id="videoUrl-${article._id}" value="${article.videoUrl}" required>` 
@@ -870,12 +861,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <label for="imageSecondaire2">Image du sous titre 2 (optionnelle) :</label>
                 <input type="file" id="imageSecondaire2" name="imageSecondaire2" accept="image/*">
 
-                <label for="imageSecondaire1">Image secondaire 1 (optionnelle) :</label>
-                <input type="file" id="imageSecondaire1" name="imageSecondaire1" accept="image/*">
-
-                <label for="imageSecondaire2">Image secondaire 2 (optionnelle) :</label>
-                <input type="file" id="imageSecondaire2" name="imageSecondaire2" accept="image/*">
-               
+                
                 <label for="externalLink">Ajouté un lien externe :</label>
                 <input type="text" name="externalLink" placeholder="www.http://exemple.com" required>
                 <label for="externalLinkTitle">Titre du lien externe :</label>
