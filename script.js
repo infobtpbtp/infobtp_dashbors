@@ -581,19 +581,29 @@ document.addEventListener('DOMContentLoaded', () => {
                             <label for="tags-${article._id}">Tags :</label>
                             <input type="text" name="tags" id="tags-${article._id}" value="${article.tags.join(', ')}" required>
                             
-                            <label for="image-${article._id}">Image actuelle :</label>
-                            <img src="${article.imageGrandTitre}" alt="Image actuelle" style="max-width: 200px;">
-                            <label for="newImage-${article._id}">Changer l'image :</label>
+                            <label for="image-${article._id}">Image principale actuelle :</label>
+                            <img src="${article.imageGrandTitre}" alt="Image principale actuelle" style="max-width: 200px;">
+                            <label for="newImage-${article._id}">Changer l'image principale :</label>
                             <input type="file" id="newImage-${article._id}" name="imageGrandTitre" accept="image/*">
                             
-                            <label for="imageSecondaire1-${article._id}">Image secondaire 1 actuelle:</label>
-                            <img src="${article.imageSecondaire1}" alt="Image actuelle" style="max-width: 200px;">
-                            <label for="newImageSecondaire1-${article._id}">Changer l'image :</label>
+                            <label for="imageSousTitre1-${article._id}">Image sous-titre 1 actuelle :</label>
+                            <img src="${article.titres.sousTitres[0].imageSousTitre}" alt="Image sous-titre 1" style="max-width: 200px;">
+                            <label for="newImageSousTitre1-${article._id}">Changer l'image sous-titre 1 :</label>
+                            <input type="file" id="newImageSousTitre1-${article._id}" name="imageSousTitre1" accept="image/*">
+                            
+                            <label for="imageSousTitre2-${article._id}">Image sous-titre 2 actuelle :</label>
+                            <img src="${article.titres.sousTitres[1].imageSousTitre}" alt="Image sous-titre 2" style="max-width: 200px;">
+                            <label for="newImageSousTitre2-${article._id}">Changer l'image sous-titre 2 :</label>
+                            <input type="file" id="newImageSousTitre2-${article._id}" name="imageSousTitre2" accept="image/*">
+
+                            <label for="imageSecondaire1-${article._id}">Image secondaire 1 actuelle :</label>
+                            <img src="${article.titres.imageSecondaire1 || ''}" alt="Image secondaire 1" style="max-width: 200px;">
+                            <label for="newImageSecondaire1-${article._id}">Changer l'image secondaire 1 :</label>
                             <input type="file" id="newImageSecondaire1-${article._id}" name="imageSecondaire1" accept="image/*">
                             
-                            <label for="imageSecondaire2-${article._id}">Image secondaire 2 actuelle:</label>
-                            <img src="${article.imageSecondaire2}" alt="Image actuelle" style="max-width: 200px;">
-                            <label for="newImageSecondaire2-${article._id}">Changer l'image :</label>
+                            <label for="imageSecondaire2-${article._id}">Image secondaire 2 actuelle :</label>
+                            <img src="${article.titres.imageSecondaire2 || ''}" alt="Image secondaire 2" style="max-width: 200px;">
+                            <label for="newImageSecondaire2-${article._id}">Changer l'image secondaire 2 :</label>
                             <input type="file" id="newImageSecondaire2-${article._id}" name="imageSecondaire2" accept="image/*">
                             
                             ${section === 'BTP Video' || section === 'Video Journalistiques' ? 
@@ -858,6 +868,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <label for="sousTitre2">Contenu du sous titre 2 :</label>
                 <textarea name="contenuSousTitre2" placeholder="Contenu du sous titre 2" ></textarea>
                 <label for="imageSecondaire2">Image du sous titre 2 (optionnelle) :</label>
+                <input type="file" id="imageSecondaire2" name="imageSecondaire2" accept="image/*">
+
+                <label for="imageSecondaire1">Image secondaire 1 (optionnelle) :</label>
+                <input type="file" id="imageSecondaire1" name="imageSecondaire1" accept="image/*">
+
+                <label for="imageSecondaire2">Image secondaire 2 (optionnelle) :</label>
                 <input type="file" id="imageSecondaire2" name="imageSecondaire2" accept="image/*">
                
                 <label for="externalLink">Ajouté un lien externe :</label>
