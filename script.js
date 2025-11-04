@@ -147,6 +147,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'Faits-divers':
                     url = `${baseUrl}/divers`;
                     break;
+                case 'Architecture':
+                    url = `${baseUrl}/architecture`;
+                    break;
+                case 'Energies-Mines':
+                    url = `${baseUrl}/energiesmines`;
+                    break;
+                case 'Foncier':
+                    url = `${baseUrl}/foncier`;
+                    break;
+                case 'Marches-Industries':
+                    url = `${baseUrl}/marchesindustries`;
+                    break;
+                case 'Produits-Materiaux':
+                    url = `${baseUrl}/produitsmateriaux`;
+                    break;
+                case 'Travaux-Publics':
+                    url = `${baseUrl}/travauxpublics`;
+                    break;
                 default:
                     console.error('Section non reconnue');
                     return;            }
@@ -246,6 +264,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'Faits-divers':
                 url = `${baseUrl}/divers/search`;
+                break;
+            case 'Architecture':
+                url = `${baseUrl}/architecture/search`;
+                break;
+            case 'Energies-Mines':
+                url = `${baseUrl}/energiesmines/search`;
+                break;
+            case 'Foncier':
+                url = `${baseUrl}/foncier/search`;
+                break;
+            case 'Marches-Industries':
+                url = `${baseUrl}/marchesindustries/search`;
+                break;
+            case 'Produits-Materiaux':
+                url = `${baseUrl}/produitsmateriaux/search`;
+                break;
+            case 'Travaux-Publics':
+                url = `${baseUrl}/travauxpublics/search`;
                 break;
             default:
                 console.error('Section non reconnue');
@@ -388,13 +424,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     url = `${baseUrl}/institutions/${id}`;
                     break;
                 case 'Sondages':
-                        url = `${baseUrl}/sondages/${id}`;
-                        break;
+                    url = `${baseUrl}/sondages/${id}`;
+                    break;
                 case 'Opinion':
                     url = `${baseUrl}/opinions/${id}`;
                     break;
                 case 'Faits-divers':
                     url = `${baseUrl}/divers/${id}`;
+                    break;
+                case 'Architecture':
+                    url = `${baseUrl}/architecture/${id}`;
+                    break;
+                case 'Energies-Mines':
+                    url = `${baseUrl}/energiesmines/${id}`;
+                    break;
+                case 'Foncier':
+                    url = `${baseUrl}/foncier/${id}`;
+                    break;
+                case 'Marches-Industries':
+                    url = `${baseUrl}/marchesindustries/${id}`;
+                    break;
+                case 'Produits-Materiaux':
+                    url = `${baseUrl}/produitsmateriaux/${id}`;
+                    break;
+                case 'Travaux-Publics':
+                    url = `${baseUrl}/travauxpublics/${id}`;
                     break;
                 default:
                     console.error('Section non reconnue');
@@ -465,6 +519,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'Sondages':
                 url = `${baseUrl}/sondages/${id}`;
+                break;
+            case 'Architecture':
+                url = `${baseUrl}/architecture/${id}`;
+                break;
+            case 'Energies-Mines':
+                url = `${baseUrl}/energiesmines/${id}`;
+                break;
+            case 'Foncier':
+                url = `${baseUrl}/foncier/${id}`;
+                break;
+            case 'Marches-Industries':
+                url = `${baseUrl}/marchesindustries/${id}`;
+                break;
+            case 'Produits-Materiaux':
+                url = `${baseUrl}/produitsmateriaux/${id}`;
+                break;
+            case 'Travaux-Publics':
+                url = `${baseUrl}/travauxpublics/${id}`;
                 break;
             default:
                 console.error('Section non reconnue');
