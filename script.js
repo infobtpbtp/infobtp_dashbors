@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'Institutions':
                     url = `${baseUrl}/institutions`;
                     break;
-                
                 case 'Opinion':
                     url = `${baseUrl}/opinions`;
                     break;
@@ -564,13 +563,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             <input type="text" name="sousTitre1" id="sousTitre1-${article._id}" value="${article.titres.sousTitres[0].sousTitre}" >
                             
                             <label for="contenuSousTitre1-${article._id}">Contenu du sous titre 1 :</label>
-                            <textarea name="contenuSousTitre1" id="contenuSousTitre1-${article._id}" required>${article.titres.sousTitres[0].contenuSousTitre}</textarea>
+                            <textarea name="contenuSousTitre1" id="contenuSousTitre1-${article._id}" >${article.titres.sousTitres[0].contenuSousTitre}</textarea>
                             
                             <label for="sousTitre2-${article._id}">Sous Titre 2 :</label>
                             <input type="text" name="sousTitre2" id="sousTitre2-${article._id}" value="${article.titres.sousTitres[1].sousTitre}" >
                             
                             <label for="contenuSousTitre2-${article._id}">Contenu du sous titre 2 :</label>
-                            <textarea name="contenuSousTitre2" id="contenuSousTitre2-${article._id}" required>${article.titres.sousTitres[1].contenuSousTitre}</textarea>
+                            <textarea name="contenuSousTitre2" id="contenuSousTitre2-${article._id}" >${article.titres.sousTitres[1].contenuSousTitre}</textarea>
                             
                             <label for="auteur-${article._id}">Auteur:</label>
                             <input type="text" name="auteur" id="auteur-${article._id}" value="${article.auteur}" required>
