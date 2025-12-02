@@ -643,6 +643,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             <label for="contenuSousTitre2-${article._id}">Contenu du sous titre 2 :</label>
                             <textarea name="contenuSousTitre2" id="contenuSousTitre2-${article._id}" >${article.titres.sousTitres[1].contenuSousTitre}</textarea>
                             
+                            <label for="sousTitre3-${article._id}">Sous Titre 3 :</label>
+                            <input type="text" name="sousTitre3" id="sousTitre3-${article._id}" value="${article.titres.sousTitres[2].sousTitre}" >
+
+                            <label for="contenuSousTitre3-${article._id}">Contenu du sous titre 3 :</label>
+                            <textarea name="contenuSousTitre3" id="contenuSousTitre3-${article._id}" >${article.titres.sousTitres[2].contenuSousTitre}</textarea>
+                            
                             <label for="auteur-${article._id}">Auteur:</label>
                             <input type="text" name="auteur" id="auteur-${article._id}" value="${article.auteur}" required>
                             
@@ -932,6 +938,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <label for="imageSecondaire2">Image du sous titre 2 (optionnelle) :</label>
                 <input type="file" id="imageSecondaire2" name="imageSecondaire2" accept="image/*">
 
+                <label for="sousTitre3">Sous Titre 3 :</label>
+                <input type="text" name="sousTitre3" placeholder="Sous Titre 3" >
+                <label for="sousTitre3">Contenu du sous titre 3 :</label>
+                <textarea name="contenuSousTitre3" placeholder="Contenu du sous titre 3" ></textarea>
+                
                 
                 <label for="externalLink">Ajouté un lien externe :</label>
                 <input type="text" name="externalLink" placeholder="www.http://exemple.com" required>
