@@ -357,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h3>${article.titres.grandTitre}</h3>
                         <h4>${article.titres.sousTitres[0].sousTitre}</h4>
                         <h4>${article.titres.sousTitres[1].sousTitre}</h4>
+                        <h4>${article.titres.sousTitres[2].sousTitre}</h4>
                         <div class="article-actions">
                             <button class="edit-button">Modifier</button>
                         <button class="delete-button" data-section="${section}" data-id="${article._id}">Supprimer</button>                    </div>
@@ -673,7 +674,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             <label for="newImageSousTitre2-${article._id}">Changer l'image sous-titre 2 :</label>
                             <input type="file" id="newImageSousTitre2-${article._id}" name="imageSousTitre2" accept="image/*">
 
-                           
+                            <label for="imageSousTitre3-${article._id}">Image sous-titre 3 actuelle :</label>
+                            <img src="${article.titres.sousTitres[2].imageSousTitre}" alt="Image sous-titre 3" style="max-width: 200px;">
+                            <label for="newImageSousTitre3-${article._id}">Changer l'image sous-titre 3 :</label>
+                            <input type="file" id="newImageSousTitre3-${article._id}" name="imageSousTitre3" accept="image/*">
+
                             ${section === 'BTP Video' || section === 'Video Journalistiques' ? 
                                 `<label for="videoUrl-${article._id}">URL de la vidéo :</label>
                                 <input type="url" name="videoUrl" id="videoUrl-${article._id}" value="${article.videoUrl}" required>` 
@@ -942,6 +947,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <input type="text" name="sousTitre3" placeholder="Sous Titre 3" >
                 <label for="sousTitre3">Contenu du sous titre 3 :</label>
                 <textarea name="contenuSousTitre3" placeholder="Contenu du sous titre 3" ></textarea>
+                <label for="imageSecondaire3">Image du sous titre 3 (optionnelle) :</label>
+                <input type="file" id="imageSecondaire3" name="imageSecondaire3" accept="image/*">
                 
                 
                 <label for="externalLink">Ajouté un lien externe :</label>
